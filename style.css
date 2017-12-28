@@ -145,10 +145,7 @@ body {
     width: 33.33%;
     display: flex;
     flex-direction: column;
-    /*padding-left: 15px;*/
-    /*padding-right: 10px;*/
     border-right: 1px solid rgba(0,0,0,0.15);
-
 }
 
 .box-message .box-code {
@@ -160,7 +157,7 @@ body {
 
 .box-message .code-textarea {
     font-family: 'Monaco', monospace;
-    font-size: 14px;
+    /*font-size: 14px;*/
     width: 100%;
     background: transparent;
     border: none;
@@ -180,8 +177,6 @@ body {
     width: 33.33%;
     display: flex;
     flex-direction: column;
-/*    padding-left: 10px;
-    padding-right: 10px;*/
     border-right: 1px solid rgba(0,0,0,0.15);
 }
 
@@ -205,7 +200,7 @@ body {
 
 .box-mapping .CodeMirror {
     font-family: 'Monaco', monospace;
-    font-size: 14px;
+    /*font-size: 14px;*/
 }
 
 .box-mapping .box-code .CodeMirror {
@@ -246,28 +241,24 @@ body {
     height: 95vh; /* стиль добавлен Мишей */
 }
 
+/* Styles for Codemirror */
 
-/* Code mirror */
-
-.box-code .CodeMirror {
-    font-size: 11px;
-    height: 100vh;
-    /*width: 100%;*/
-}
-
-/* Split Style */
-.gutter{
-    background-color: #eee;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    width: 20px;
-}
-.gutter-horizontal{
-    background-image: url(https://nathancahill.github.io/Split.js/grips/vertical.png);
-    cursor: ew-resize;
+.CodeMirror {
+    font-size: 13px;
 }
 
 .cm-style { color: red; }
+
+/* Split Panes by split.js */
+.gutter {
+    background: #eee no-repeat 50%;
+}
+.gutter.gutter-horizontal {
+    height: 100%;
+    float: left;
+    background-image: url(vertical.png);
+    cursor: ew-resize;
+}
 
 /* Mike Custom Styles */
 
@@ -275,5 +266,3 @@ body {
     border: none;
     background-color: transparent;
 }
-
-

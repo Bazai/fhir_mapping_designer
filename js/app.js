@@ -100,6 +100,7 @@ const app = new Vue({
 });
 
 split(['#form', '#mapping', '#fhir'], {
+  // gutterSize: 20,
   elementStyle: function (dimension, size, gutterSize) {
     return {
       'flex-basis': 'calc(' + size + '% - ' + gutterSize + 'px)'
