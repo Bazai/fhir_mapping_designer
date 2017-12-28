@@ -1,3 +1,5 @@
+const split = window.Split;
+
 const formObjectTemplate = {
   "firstName": "Ivan",
   "lastName": "Ivanov",
@@ -57,7 +59,6 @@ const personMappingTemplate = `[
   }
 ];`;
 
-
 const templates = {
   patient: patientMappingTemplate,
   person: personMappingTemplate
@@ -97,3 +98,16 @@ const app = new Vue({
     }
   }
 });
+
+split(['#form', '#mapping', '#fhir'], {
+  elementStyle: function (dimension, size, gutterSize) {
+    return {
+      'flex-basis': 'calc(' + size + '% - ' + gutterSize + 'px)'
+    }
+  },
+  gutterStyle: function (dimension, gutterSize) {
+    return {
+      'flex-basis':  gutterSize + 'px'
+    }
+  }
+})
