@@ -80,12 +80,10 @@ const app = new Vue({
   data: {
     formObject: JSON.stringify(formObjectTemplate, null, 2),
     mapperConfig: JSON.stringify(mappingTemplate, null, 2),
-    fhirObject: JSON.stringify(formObjectTemplate, null, 2),
-    test: "hi"
+    fhirObject: JSON.stringify(formObjectTemplate, null, 2)
   },
   watch: {
     formObject: function(val) {
-      const result = JSON.stringify(val, null, 2);
       this.fhirObject = val;
     }
   },
