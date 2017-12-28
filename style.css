@@ -159,7 +159,7 @@ body {
 
 .box-message .code-textarea {
     font-family: 'Monaco', monospace;
-    font-size: 14px;
+    /*font-size: 14px;*/
     width: 100%;
     background: transparent;
     border: none;
@@ -204,7 +204,7 @@ body {
 
 .box-mapping .CodeMirror {
     font-family: 'Monaco', monospace;
-    font-size: 14px;
+    /*font-size: 14px;*/
 }
 
 .box-mapping .box-code .CodeMirror {
@@ -247,9 +247,9 @@ body {
 
 /* Code mirror */
 
-.box-code .CodeMirror {
-    font-size: 11px;
-    height: 85vh;
+.CodeMirror {
+    font-size: 13px;
+    /*height: 85vh;*/
     /*width: 100%;*/
 }
 
