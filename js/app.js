@@ -1,6 +1,3 @@
-const jsBeautify = window.js_beautify;
-console.log(jsBeautify);
-
 const formObjectTemplate = {
   "firstName": "Ivan",
   "lastName": "Ivanov",
@@ -10,26 +7,7 @@ const formObjectTemplate = {
   "gender": "male",
 };
 
-// const _fhirDate = (date, fromFormat) => {
-//   const a = moment(date, fromFormat).format(FHIR_DATE);
-//   return a;
-// };
-
-const formDate2fhirDate = a => a;
-// TODO: copy
-//   const b = _fhirDate(a);
-//   return b;
-// };
-
-const fhirDate2formDate = a => a;
-// {
-//   // TODO: copy
-//   const b = _fhirDate(a);
-//   return b;
-// };
-
-
-const mappingTemplate = `[
+const patientMappingTemplate = `[
   {
     fhir: ["resourceType"],
     fhir_const: "Patient"
@@ -60,83 +38,39 @@ const mappingTemplate = `[
   }
 ];`;
 
-const mappingTemplate2 = {
-  mapping: [
-    {
-      fhir: ["resourceType"],
-      fhir_const: "Encounter"
-    },
-    {
-      fhir: ["type", 0, "coding", 0],
-      form: ["type"]
-    },
-    {
-      fhir: ["id"],
-      form: ["id"]
-    },
-    {
-      fhir: ["reason", 0, "text"],
-      form: ["reason"]
-    },
-    {
-      fhir: ["participant", 0, "type", 0],
-      fhir_const: "ADMITTER"// ADMITTER
-    },
-    {
-      fhir: ["participant", 0, "individual", "reference"],
-      form: ["physician", "reference"]
-    },
-    {
-      fhir: ["participant", 0, "individual", "display"],
-      form: ["physician", "display"]
-    },
-    {
-      fhir: ["serviceProvider", "display"],
-      form: ["facility"]
-    },
-    {
-      fhir: ["status"],
-      form: ["status"],
-      to_fhir: v => {
-        if (v === true) {
-          return "in-progress";
-        }
-        return "finished";
-      },
-      to_form: v => {
-        return v === "in-progress";
-      }
-    },
-    {
-      fhir: ["period", "start"],
-      form: ["admissionDate"],
-      // to_fhir: DateFormat.form2fhir,
-      // to_form: DateFormat.fhir2form
-    },
-    {
-      fhir: ["period", "end"],
-      form: ["dischargeDate"],
-      // to_fhir: DateFormat.form2fhir,
-      // to_form: DateFormat.fhir2form
-    },
-    {
-      // fhir: ["extension", anticipatedDischargeDateEx, "valueDate"],
-      fhir: ["extension", "anticipatedDischargeDateEx", "valueDate"],
-      form: ["anticipatedDischargeDate"],
-      // to_fhir: DateFormat.form2fhir,
-      // to_form: DateFormat.fhir2form
-    }
-  ]
+const personMappingTemplate = `[
+  {
+    fhir: ["resourceType"],
+    fhir_const: "Person"
+  },
+  {
+    fhir: ["name", {use: "official"}, "given", 0],
+    form: ["firstName"]
+  },
+  {
+    fhir: ["name", {use: "official"}, "family", 0],
+    form: ["lastName"]
+  },
+  {
+    fhir: ["gender"],
+    form: ["gender"]
+  }
+];`;
+
+
+const templates = {
+  patient: patientMappingTemplate,
+  person: personMappingTemplate
 };
 
 Vue.use(VueCodemirror);
 const app = new Vue({
   el: "#app",
   data: {
-    code: 'const a = 10',
     formObject: JSON.stringify(formObjectTemplate, null, 2),
-    mapperConfig: mappingTemplate,
+    mapperConfig: patientMappingTemplate,
     fhirObject: JSON.stringify(formObjectTemplate, null, 2),
+    mappingTemplate: null,
     cmOption: {
       tabSize: 4,
       styleActiveLine: true,
@@ -157,6 +91,9 @@ const app = new Vue({
       const form = JSON.parse(this.formObject.length > 0 ? this.formObject : "{}");
       const result = Mapper.formToFhir(form, mapper);
       this.fhirObject = result;
+    },
+    mappingTemplate: function (val) {
+      this.mapperConfig = templates[val.toLowerCase()];
     }
   }
 });

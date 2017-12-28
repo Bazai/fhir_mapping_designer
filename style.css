@@ -193,6 +193,11 @@ body {
     position: relative;
 }
 
+.box-mapping .box-header {
+    display: flex;
+    justify-content: space-between;
+}
+
 .box-mapping .box-code textarea {
     height: 0;
     flex: none;

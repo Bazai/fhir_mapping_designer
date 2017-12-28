@@ -60,9 +60,14 @@
             </div>
         </div>
 
-        <div class="box-message">
+        <div class="box-message box-mapping">
             <div class="box-header">
                 <h3>Mapping Config</h3>
+                <select v-model="mappingTemplate">
+                    <option disabled value="">Please select one</option>
+                    <option>Patient</option>
+                    <option>Person</option>
+                </select>
             </div>
             <!--<codemirror v-model="code" :options="cmOption"></codemirror>-->
             <div class="box-code">
