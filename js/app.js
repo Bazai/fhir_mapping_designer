@@ -28,58 +28,8 @@ const fhirDate2formDate = a => a;
 //   return b;
 // };
 
-const mappingTemplate = {
-  mapping: [
-    {
-      fhir: ["resourceType"],
-      fhir_const: "Patient"
-    },
-    {
-      fhir: ["name", {use: "official"}, "given", 0],
-      form: ["firstName"]
-    },
-    {
-      fhir: ["name", {use: "official"}, "family", 0],
-      form: ["lastName"]
-    },
-    {
-      fhir: ["gender"],
-      form: ["gender"]
-    },
-    {
-      fhir: ["telecom", {"use": "home", "system": "phone"}, "value"],
-      form: ["phone"]
-    },
-    {
-      fhir: ["telecom", {"system": "email"}, "value"],
-      form: ["email"]
-    },
-    // {
-    //   fhir: ["name", {use: "official"}, "given", 1],
-    //   form: ["middleName"]
-    // },
-    // {
-    //   fhir: ["name", {use: "official"}, "suffix", 0],
-    //   form: ["suffix"]
-    // },
-    // {
-    //   fhir: ["name", {use: "usual"}, "given", 0],
-    //   form: ["preferredName"]
-    // },
-    {
-      fhir: ["birthDate"],
-      form: ["birthdate"]
-      // to_fhir: formDate2fhirDate,
-      // to_form: fhirDate2formDate
-    }
-    // {
-    //   fhir: ["extension", supportiveEmployerEx, "valueString"],
-    //   form: ["supportiveEmployer"]
-    // }
-  ]
-};
 
-const test = `[
+const mappingTemplate = `[
   {
     fhir: ["resourceType"],
     fhir_const: "Patient"
@@ -185,8 +135,7 @@ const app = new Vue({
   data: {
     code: 'const a = 10',
     formObject: JSON.stringify(formObjectTemplate, null, 2),
-    // mapperConfig: jsBeautify(JSON.stringify(mappingTemplate)),
-    mapperConfig: test,
+    mapperConfig: mappingTemplate,
     fhirObject: JSON.stringify(formObjectTemplate, null, 2),
     cmOption: {
       tabSize: 4,
@@ -198,15 +147,16 @@ const app = new Vue({
   },
   watch: {
     formObject: function (val) {
-      const mapper = eval(this.mapperConfig);
-      console.log("MMMMMMM", mapper);
-      const form = JSON.parse(val);
-      // const mapper = JSON.parse(this.mapperConfig).mapping;
+      const mapper = eval(this.mapperConfig.length > 0 ? this.mapperConfig : "[]");
+      const form = JSON.parse(val.length > 0 ? val : "{}");
       const result = Mapper.formToFhir(form, mapper);
       this.fhirObject = result;
     },
-    code: function (val) {
-      console.log("Val", val);
+    mapperConfig: function (val) {
+      const mapper = eval(val.length > 0 ? val : "[]");
+      const form = JSON.parse(this.formObject.length > 0 ? this.formObject : "{}");
+      const result = Mapper.formToFhir(form, mapper);
+      this.fhirObject = result;
     }
   }
 });
