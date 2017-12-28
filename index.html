@@ -51,11 +51,10 @@
                 <h3>Flat Form Object</h3>
             </div>
             <div class="box-code">
-                <codemirror v-model="formObject" :options="cmOption"></codemirror>
-                <!--<textarea-->
-                        <!--class="code-textarea"-->
-                        <!--v-model="formObject"-->
-                        <!--&gt;</textarea>-->
+                <textarea
+                        class="code-textarea"
+                        v-model="formObject"
+                        ></textarea>
             </div>
         </div>
 
@@ -83,8 +82,7 @@
                 <h3>FHIR Result</span></h3>
             </div>
 
-            <codemirror v-model="fhirObject" :options="cmOption"></codemirror>
-            <!--<pre class="box-code">{{ fhirObject }}</pre>-->
+            <pre class="box-code">{{ fhirObject }}</pre>
         </div>
 
     </div>
