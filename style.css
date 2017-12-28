@@ -37,26 +37,35 @@ body {
 }
 
 .header {
+    position: relative;
     display: flex;
+    justify-content: space-between;
     border-bottom: 1px solid #ddd;
     min-height: 50px;
-    padding: 10px 30px;
+    padding: 13px 30px;
+    background-color: #24292e;
+    color: #fff;
+    align-items: center;
 }
 
 .header-text {
     flex: 3;
     display: flex;
     align-items: center;
+    align-self: center;
+}
+
+.header-title a{
+    color: #fff;
 }
 
 .header-title-heading {
     font-size: 21px;
     font-weight: 700;
-    color: #333;
-}
-
-.header-action-btn {
-    line-height: 33px;
+    color: #fff;
+    padding-left: 10px;
+    padding-right: 16px;
+    vertical-align: middle;
 }
 
 .header-action-btn:hover {
@@ -71,25 +80,11 @@ body {
     text-decoration: none;
 }
 
-.health-samurai {
-    margin-top: -5px;
-}
-.health-samurai span {
-    /*text-transform: uppercase;*/
-    font-size: 11px;
-    letter-spacing: 1px;
-    opacity: 0.6;
-}
-
-.health-samurai a {
-    font-size: 14px;
-    color: #333;
-    border-bottom: 1px dashed #333;
-}
-
-.health-samurai a:hover {
-    text-decoration: none;
-    border-bottom: none;
+.header-text a.hs-link{
+    color: #fff;
+    /*border-bottom: 1px dotted #fff;*/
+    padding-top: 4px;
+    font-style: italic;
 }
 
 .header-presets {
@@ -98,8 +93,7 @@ body {
 }
 
 .header-presets a {
-    /* color: #2f2578; */
-    color: hsla(247,69%,47%,1);
+    color: #fff;
 }
 
 .header-actions {
@@ -109,8 +103,6 @@ body {
 
 .boxes-wrapper {
     padding: 0;
-    /*padding-top: 15px;
-    padding-bottom: 25px;*/
     position: absolute;
     top: 68px;
     left: 0;
@@ -124,12 +116,12 @@ body {
     padding: 20px 30px;
     border-bottom: 1px solid #ddd;
     min-height: 52px;
+    background-color: rgba(36,41,46,0.05);
 }
 
 .box-header h3 {
     margin: 0;
-    /*text-transform: uppercase;*/
-    font-size: 1.3em;
+    font-size: 1.5em;
 }
 
 .box-code {
@@ -145,7 +137,6 @@ body {
     width: 33.33%;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid rgba(0,0,0,0.15);
 }
 
 .box-message .box-code {
@@ -153,21 +144,16 @@ body {
     display: flex;
     align-items: stretch;
     height: 95vh; /* стиль добавлен Мишей */
+    position: relative;
+    overflow: hidden;
+    flex-direction: column;
 }
 
-.box-message .code-textarea {
-    font-family: 'Monaco', monospace;
-    /*font-size: 14px;*/
-    width: 100%;
-    background: transparent;
-    border: none;
-    padding: 4px 5px 0 25px;
-    line-height: 22.5px;
-    border-left: 30px solid #f7f7f7;
-    padding-left: 5px;
-    white-space: nowrap;
-    overflow: auto;
+.box-message .CodeMirror {
+    /*font-family: 'Monaco', monospace;*/
+    font-size: 14px;
 }
+
 
 /************\
    Mapping
@@ -177,11 +163,10 @@ body {
     width: 33.33%;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid rgba(0,0,0,0.15);
 }
 
 .box-mapping .box-code {
-    flex: 3;
+    /*flex: 3;*/
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -199,8 +184,18 @@ body {
 }
 
 .box-mapping .CodeMirror {
-    font-family: 'Monaco', monospace;
-    /*font-size: 14px;*/
+    /*font-family: 'Monaco', monospace;*/
+    font-size: 14px;
+}
+
+.box-message .box-code .CodeMirror {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: transparent;
 }
 
 .box-mapping .box-code .CodeMirror {
@@ -221,8 +216,6 @@ body {
     width: 33.33%;
     display: flex;
     flex-direction: column;
-    /*padding-left: 10px;*/
-    /*padding-right: 15px;*/
 }
 
 .box-result .box-code {
@@ -251,7 +244,9 @@ body {
 
 /* Split Panes by split.js */
 .gutter {
-    background: #eee no-repeat 50%;
+    background: rgba(36,41,46,0.01) no-repeat 50%;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
 }
 .gutter.gutter-horizontal {
     height: 100%;
@@ -263,6 +258,38 @@ body {
 /* Mike Custom Styles */
 
 .box-header select{
-    border: none;
-    background-color: transparent;
+    width: 160px;
+    height: 40px;
+    color: rgba(36,41,46,1);
+    border: 1px solid rgba(36,41,46,0.05);
+    /*background-color: rgba(36,41,46,0.05);*/
+    background-color: #fff; 
+    margin-bottom: -8px;
+    margin-top: -8px;
+    margin-right: -10px;
 }
+
+.github-logo-invertocat {
+    color: #fff;
+    white-space: nowrap;
+    margin-left: 10px;
+}
+
+.github-logo-invertocat:hover,
+.github-logo-invertocat:active,
+.github-logo-invertocat:focus {
+    color: #fff;
+    white-space: nowrap;
+    margin-left: 10px;
+}
+
+.octicon {
+    display: inline-block;
+    vertical-align: text-top;
+    fill: currentColor;
+}
+
+
+
+
+

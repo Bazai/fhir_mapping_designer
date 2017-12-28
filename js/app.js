@@ -1,12 +1,12 @@
 const split = window.Split;
 
 const formObjectTemplate = {
-  "firstName": "Ivan",
-  "lastName": "Ivanov",
-  "phone": "+79611234567",
-  "email": "mail@mail.com",
-  "birthdate": "10.12.1997",
-  "gender": "male",
+  "firstname": "",
+  "lastname": "",
+  "phone": "",
+  "email": "",
+  "birthdate": "",
+  "gender": "",
 };
 
 const patientMappingTemplate = `[
@@ -16,27 +16,27 @@ const patientMappingTemplate = `[
   },
   {
     fhir: ["name", {use: "official"}, "given", 0],
-    form: ["firstName"]
+    form: [""]
   },
   {
     fhir: ["name", {use: "official"}, "family", 0],
-    form: ["lastName"]
+    form: [""]
   },
   {
     fhir: ["gender"],
-    form: ["gender"]
+    form: [""]
   },
   {
     fhir: ["telecom", { "use":"home", "system":"phone" }, "value"],
-    form: ["phone"]
+    form: [""]
   },
   {
     fhir: ["telecom", { "system":"email" }, "value"],
-    form: ["email"]
+    form: [""]
   },
   {
     fhir: ["birthDate"],
-    form: ["birthdate"]
+    form: [""]
   }
 ];`;
 
@@ -47,15 +47,15 @@ const personMappingTemplate = `[
   },
   {
     fhir: ["name", {use: "official"}, "given", 0],
-    form: ["firstName"]
+    form: [""]
   },
   {
     fhir: ["name", {use: "official"}, "family", 0],
-    form: ["lastName"]
+    form: [""]
   },
   {
     fhir: ["gender"],
-    form: ["gender"]
+    form: [""]
   }
 ];`;
 
@@ -100,7 +100,7 @@ const app = new Vue({
 });
 
 split(['#form', '#mapping', '#fhir'], {
-  // gutterSize: 20,
+  gutterSize: 20,
   elementStyle: function (dimension, size, gutterSize) {
     return {
       'flex-basis': 'calc(' + size + '% - ' + gutterSize + 'px)'
