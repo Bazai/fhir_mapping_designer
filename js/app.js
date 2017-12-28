@@ -1,5 +1,3 @@
-const url = "https://coursehunters.net/course/geekbrains-wordpress";
-
 const formObjectTemplate = {
   firstName: "Ivan",
   lastName: "Ivanov",
@@ -76,40 +74,28 @@ const mappingTemplate = {
   ]
 };
 
-// const parseResponseVideos = body => {
-//   let responseHTML = document.createElement("html");
-//   responseHTML.innerHTML = body;
-//
-//   const inputs = responseHTML.querySelectorAll("#lessons-list li");
-//
-//   const items = Object.keys(inputs).map(element => {
-//     let elementHTML = document.createElement("div");
-//   elementHTML.innerHTML = inputs[element].innerHTML;
-//   let item = elementHTML
-//     .querySelector("link[itemprop=url]")
-//     .getAttribute("href");
-//   return item;
-// });
-//   return items;
-// };
-
 console.log('message', JSON.stringify(formObjectTemplate, null, 2));
 const app = new Vue({
   el: "#app",
   data: {
-    links: {
-      loading: false,
-      data: []
-    },
-    url: "https://coursehunters.net/course/geekbrains-wordpress",
     formObject: JSON.stringify(formObjectTemplate, null, 2),
     mapperConfig: JSON.stringify(mappingTemplate, null, 2),
-    fhirObject: JSON.stringify(formObjectTemplate, null, 2)
+    fhirObject: JSON.stringify(formObjectTemplate, null, 2),
+    test: "hi"
+  },
+  watch: {
+    formObject: function(val) {
+      const result = JSON.stringify(val, null, 2);
+      this.fhirObject = val;
+    }
   },
   methods: {
     getData() {
       this.links.loading = true;
       this.links.data = [{foo: "bar"}];
+    },
+    foo(data) {
+      console.log("dddddddddd", data);
     }
   }
 });

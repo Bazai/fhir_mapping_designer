@@ -50,7 +50,10 @@
                 <h3>Message</h3>
             </div>
             <div class="box-code">
-                <textarea class="code-textarea" v-model="formObject"></textarea>
+                <textarea
+                        class="code-textarea"
+                        v-model="formObject"
+                        ></textarea>
             </div>
         </div>
 
@@ -67,7 +70,7 @@
 
         <div class="box-result">
             <div class="box-header">
-                <h3>Result</h3>
+                <h3>Result <span>{{ test }}</span></h3>
             </div>
 
             <pre class="box-code">{{ fhirObject }}</pre>
