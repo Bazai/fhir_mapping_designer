@@ -8,80 +8,71 @@
     <meta name="viewport" content="width=device-width">
     <link href="//fonts.googleapis.com/css?family=Lato:400,900,400italic,700italic" rel="stylesheet">
     <link rel="shortcut icon" href="imgs/logo.png">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="./style.css"/>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" />
-    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.min.js" ></script>-->
-    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-animate.min.js" ></script>-->
-    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-cookies.min.js" ></script>-->
-    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-sanitize.min.js" ></script>-->
-    <!--<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>-->
-    <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.js"></script>
-    <!--<script src="./ui-codemirror.js"></script>-->
-    <!--<script src="./yaml.js"></script>-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- Codemirror JS Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue-codemirror@4.0.0/dist/vue-codemirror.js"></script>
+    <!-- Codemirror Libs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/addon/merge/merge.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/addon/selection/active-line.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/addon/merge/merge.min.css" rel="stylesheet">
 </head>
-<body ng-controller="MainCtrl">
+<body>
 
-<div class="header" id="app">
-    <div class="header-text">
-        <div class="header-title">
-            <div>
-                <a class="header-title-heading" href="#/">HL7 Mapping Demo</a>
+<div id="app">
+    <div class="header">
+        <div class="header-text">
+            <div class="header-title">
+                <div>
+                    <a class="header-title-heading" href="#/">FHIR Mapping Designer Demo</a>
+                </div>
+
+                <div class="health-samurai">
+                    <span>by</span>
+                    <a href="http://health-samurai.io">Health Samurai</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <a class="btn btn-default header-action-btn" href="https://twitter.com/health_samurai">Follow Us</a>
+        </div>
+    </div>
+
+    <div class="boxes-wrapper">
+        <div class="box-message">
+            <div class="box-header">
+                <h3>Message</h3>
+            </div>
+            <div class="box-code">
+                <textarea class="code-textarea" v-model="formObject"></textarea>
+            </div>
+        </div>
+
+        <div class="box-result">
+            <div class="box-header">
+                <h3>Mapping</h3>
+            </div>
+            <div class="box-code">
+                <!--<textarea ui-codemirror="codemirrorConfig"-->
+                <!--m-model="mapperConfig"></textarea>-->
+                <textarea class="code-textarea" v-model="mapperConfig"></textarea>
+            </div>
+        </div>
+
+        <div class="box-result">
+            <div class="box-header">
+                <h3>Result</h3>
             </div>
 
-            <div class="health-samurai">
-                <span>by</span>
-                <a href="http://health-samurai.io">Health Samurai</a>
-            </div>
-        </div>
-        <div class="dropdown header-presets">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Saved Presets <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li ng-repeat="p in presets">
-                    <a href="#" ng-click="loadPreset(p)">{{p.name}}</a>
-                </li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#" ng-click="savePreset()">Save...</a></li>
-            </ul>
-
-        </div>
-    </div>
-
-    <div class="header-actions">
-        <a class="btn btn-default header-action-btn" href="https://twitter.com/health_samurai">Follow Us</a>
-    </div>
-</div>
-
-<div class="boxes-wrapper">
-    <div class="box-message">
-        <div class="box-header">
-            <h3>Message</h3>
-        </div>
-        <div class="box-code">
-            <textarea class="code-textarea"></textarea>
-        </div>
-    </div>
-
-    <div class="box-mapping">
-        <div class="box-header">
-            <h3>Mapping</h3>
-        </div>
-        <div class="box-code">
-          <textarea ui-codemirror="codemirrorConfig"
-                    ng-model="mapping"></textarea>
-        </div>
-    </div>
-
-    <div class="box-result">
-        <div class="box-header">
-            <h3>Result</h3>
+            <pre class="box-code">{{ fhirObject }}</pre>
         </div>
 
-        <pre class="box-code">{{ result }}</pre>
-        <!-- <div class="box-code">
-        </div> -->
     </div>
 
 </div>
