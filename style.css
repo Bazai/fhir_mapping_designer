@@ -148,8 +148,7 @@ body {
     flex-direction: column;
     padding-left: 15px;
     padding-right: 10px;
-    border-right: 1px solid rgba(0,0,0,0.15);
-
+    /*border-right: 1px solid rgba(0,0,0,0.15);*/
 }
 
 .box-message .box-code {
@@ -182,7 +181,7 @@ body {
     flex-direction: column;
     padding-left: 10px;
     padding-right: 10px;
-    border-right: 1px solid rgba(0,0,0,0.15);
+    /*border-right: 1px solid rgba(0,0,0,0.15);*/
 }
 
 .box-mapping .box-code {
@@ -255,3 +254,14 @@ body {
 }
 
 .cm-style { color: red; }
+
+/* Split Panes by split.js */
+.gutter {
+    background: #eee no-repeat 50%;
+}
+.gutter.gutter-horizontal {
+    height: 100%;
+    float: left;
+    background-image: url(vertical.png);
+    cursor: ew-resize;
+}
