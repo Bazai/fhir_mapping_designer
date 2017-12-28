@@ -1,11 +1,82 @@
 const formObjectTemplate = {
-  firstName: "Ivan",
-  lastName: "Ivanov",
-  phone: "+79611234567",
-  birthDate: "10.12.1997"
+  "firstName": "Ivan",
+  "lastName": "Ivanov",
+  "phone": "+79611234567",
+  "email": "mail@mail.com",
+  "birthdate": "10.12.1997",
+  "gender": "male",
 };
 
+// const _fhirDate = (date, fromFormat) => {
+//   const a = moment(date, fromFormat).format(FHIR_DATE);
+//   return a;
+// };
+
+const formDate2fhirDate = a => a;
+// TODO: copy
+//   const b = _fhirDate(a);
+//   return b;
+// };
+
+const fhirDate2formDate = a => a;
+// {
+//   // TODO: copy
+//   const b = _fhirDate(a);
+//   return b;
+// };
+
 const mappingTemplate = {
+  mapping: [
+    {
+      fhir: ["resourceType"],
+      fhir_const: "Patient"
+    },
+    {
+      fhir: ["name", {use: "official"}, "given", 0],
+      form: ["firstName"]
+    },
+    {
+      fhir: ["name", {use: "official"}, "family", 0],
+      form: ["lastName"]
+    },
+    {
+      fhir: ["gender"],
+      form: ["gender"]
+    },
+    {
+      fhir: ["telecom", { "use":"home", "system":"phone" }, "value"],
+      form: ["phone"]
+    },
+    {
+      fhir: ["telecom", { "system":"email" }, "value"],
+      form: ["email"]
+    },
+    // {
+    //   fhir: ["name", {use: "official"}, "given", 1],
+    //   form: ["middleName"]
+    // },
+    // {
+    //   fhir: ["name", {use: "official"}, "suffix", 0],
+    //   form: ["suffix"]
+    // },
+    // {
+    //   fhir: ["name", {use: "usual"}, "given", 0],
+    //   form: ["preferredName"]
+    // },
+    {
+      fhir: ["birthDate"],
+      form: ["dob"]
+      // to_fhir: formDate2fhirDate,
+      // to_form: fhirDate2formDate
+    }
+    // {
+    //   fhir: ["extension", supportiveEmployerEx, "valueString"],
+    //   form: ["supportiveEmployer"]
+    // }
+  ]
+};
+
+const mappingTemplate2 = {
   mapping: [
     {
       fhir: ["resourceType"],
@@ -74,7 +145,6 @@ const mappingTemplate = {
   ]
 };
 
-console.log('message', JSON.stringify(formObjectTemplate, null, 2));
 const app = new Vue({
   el: "#app",
   data: {
@@ -83,17 +153,14 @@ const app = new Vue({
     fhirObject: JSON.stringify(formObjectTemplate, null, 2)
   },
   watch: {
-    formObject: function(val) {
-      this.fhirObject = val;
-    }
-  },
-  methods: {
-    getData() {
-      this.links.loading = true;
-      this.links.data = [{foo: "bar"}];
-    },
-    foo(data) {
-      console.log("dddddddddd", data);
+    formObject: function (val) {
+      const form = JSON.parse(val);
+      const mapper = JSON.parse(this.mapperConfig).mapping;
+      const result = Mapper.formToFhir(
+        JSON.parse(val),
+        JSON.parse(this.mapperConfig).mapping
+      );
+      this.fhirObject = result;
     }
   }
 });
