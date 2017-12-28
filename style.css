@@ -38,9 +38,9 @@ body {
 
 .header {
     display: flex;
-    border-bottom: 5px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid #ddd;
     min-height: 50px;
-    padding: 5px 15px;
+    padding: 10px 30px;
 }
 
 .header-text {
@@ -75,7 +75,7 @@ body {
     margin-top: -5px;
 }
 .health-samurai span {
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-size: 11px;
     letter-spacing: 1px;
     opacity: 0.6;
@@ -109,10 +109,10 @@ body {
 
 .boxes-wrapper {
     padding: 0;
-    padding-top: 15px;
-    padding-bottom: 25px;
+    /*padding-top: 15px;
+    padding-bottom: 25px;*/
     position: absolute;
-    top: 60px;
+    top: 68px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -121,15 +121,14 @@ body {
 }
 
 .box-header {
-    padding: 10px 5px 15px 5px;
-    background: rgba(0,0,0,0.1);
-    border-bottom: 5px solid rgba(255,255,255,0.35);
+    padding: 20px 30px;
+    border-bottom: 1px solid #ddd;
     min-height: 52px;
 }
 
 .box-header h3 {
     margin: 0;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-size: 1.3em;
 }
 
@@ -146,8 +145,8 @@ body {
     width: 33.33%;
     display: flex;
     flex-direction: column;
-    padding-left: 15px;
-    padding-right: 10px;
+    /*padding-left: 15px;*/
+    /*padding-right: 10px;*/
     border-right: 1px solid rgba(0,0,0,0.15);
 
 }
@@ -156,6 +155,7 @@ body {
     flex-grow: 3;
     display: flex;
     align-items: stretch;
+    height: 95vh; /* стиль добавлен Мишей */
 }
 
 .box-message .code-textarea {
@@ -180,8 +180,8 @@ body {
     width: 33.33%;
     display: flex;
     flex-direction: column;
-    padding-left: 10px;
-    padding-right: 10px;
+/*    padding-left: 10px;
+    padding-right: 10px;*/
     border-right: 1px solid rgba(0,0,0,0.15);
 }
 
@@ -226,8 +226,8 @@ body {
     width: 33.33%;
     display: flex;
     flex-direction: column;
-    padding-left: 10px;
-    padding-right: 15px;
+    /*padding-left: 10px;*/
+    /*padding-right: 15px;*/
 }
 
 .box-result .box-code {
@@ -243,6 +243,7 @@ body {
     padding-left: 5px;
     word-wrap: normal;
     word-break: normal;
+    height: 95vh; /* стиль добавлен Мишей */
 }
 
 
@@ -250,8 +251,29 @@ body {
 
 .box-code .CodeMirror {
     font-size: 11px;
-    height: 85vh;
+    height: 100vh;
     /*width: 100%;*/
 }
 
+/* Split Style */
+.gutter{
+    background-color: #eee;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    width: 20px;
+}
+.gutter-horizontal{
+    background-image: url(https://nathancahill.github.io/Split.js/grips/vertical.png);
+    cursor: ew-resize;
+}
+
 .cm-style { color: red; }
+
+/* Mike Custom Styles */
+
+.box-header select{
+    border: none;
+    background-color: transparent;
+}
+
+
