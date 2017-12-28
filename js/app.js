@@ -145,12 +145,20 @@ const mappingTemplate2 = {
   ]
 };
 
+Vue.use(VueCodemirror);
 const app = new Vue({
   el: "#app",
   data: {
+    code: 'const a = 10',
     formObject: JSON.stringify(formObjectTemplate, null, 2),
     mapperConfig: JSON.stringify(mappingTemplate, null, 2),
     fhirObject: JSON.stringify(formObjectTemplate, null, 2)
+  },
+  cmOption: {
+    tabSize: 4,
+    styleActiveLine: true,
+    lineNumbers: true,
+    mode: 'text/javascript'
   },
   watch: {
     formObject: function (val) {
@@ -163,4 +171,23 @@ const app = new Vue({
       this.fhirObject = result;
     }
   }
+});
+
+CodeMirror.defineMode("mymode", function() {
+  return {
+    token: function(stream,state) {
+      if (stream.match("form") ) {
+        return "style";
+      } {
+        stream.next();
+        return null;
+      }
+    }
+  };
+});
+
+
+var editor = CodeMirror.fromTextArea(document.getElementById('cm'), {
+  mode: "mymode",
+  lineNumbers: true
 });

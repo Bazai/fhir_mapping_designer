@@ -213,6 +213,11 @@ body {
     background: transparent;
 }
 
+.box-code .CodeMirror {
+    height: auto;
+    width: 100%;
+}
+
 /************\
    Result
 \************/
@@ -239,3 +244,7 @@ body {
     word-wrap: normal;
     word-break: normal;
 }
+
+
+/* Code mirror */
+.cm-style { color: red; }
