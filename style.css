@@ -213,11 +213,6 @@ body {
     background: transparent;
 }
 
-.box-code .CodeMirror {
-    height: auto;
-    width: 100%;
-}
-
 /************\
    Result
 \************/
@@ -247,4 +242,11 @@ body {
 
 
 /* Code mirror */
+
+.box-code .CodeMirror {
+    font-size: 11px;
+    height: 85vh;
+    /*width: 100%;*/
+}
+
 .cm-style { color: red; }

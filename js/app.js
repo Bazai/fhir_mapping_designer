@@ -1,3 +1,6 @@
+const jsBeautify = window.js_beautify;
+console.log(jsBeautify);
+
 const formObjectTemplate = {
   "firstName": "Ivan",
   "lastName": "Ivanov",
@@ -44,11 +47,11 @@ const mappingTemplate = {
       form: ["gender"]
     },
     {
-      fhir: ["telecom", { "use":"home", "system":"phone" }, "value"],
+      fhir: ["telecom", {"use": "home", "system": "phone"}, "value"],
       form: ["phone"]
     },
     {
-      fhir: ["telecom", { "system":"email" }, "value"],
+      fhir: ["telecom", {"system": "email"}, "value"],
       form: ["email"]
     },
     // {
@@ -65,7 +68,7 @@ const mappingTemplate = {
     // },
     {
       fhir: ["birthDate"],
-      form: ["dob"]
+      form: ["birthdate"]
       // to_fhir: formDate2fhirDate,
       // to_form: fhirDate2formDate
     }
@@ -75,6 +78,37 @@ const mappingTemplate = {
     // }
   ]
 };
+
+const test = `[
+  {
+    fhir: ["resourceType"],
+    fhir_const: "Patient"
+  },
+  {
+    fhir: ["name", {use: "official"}, "given", 0],
+    form: ["firstName"]
+  },
+  {
+    fhir: ["name", {use: "official"}, "family", 0],
+    form: ["lastName"]
+  },
+  {
+    fhir: ["gender"],
+    form: ["gender"]
+  },
+  {
+    fhir: ["telecom", { "use":"home", "system":"phone" }, "value"],
+    form: ["phone"]
+  },
+  {
+    fhir: ["telecom", { "system":"email" }, "value"],
+    form: ["email"]
+  },
+  {
+    fhir: ["birthDate"],
+    form: ["birthdate"]
+  }
+];`;
 
 const mappingTemplate2 = {
   mapping: [
@@ -151,43 +185,28 @@ const app = new Vue({
   data: {
     code: 'const a = 10',
     formObject: JSON.stringify(formObjectTemplate, null, 2),
-    mapperConfig: JSON.stringify(mappingTemplate, null, 2),
-    fhirObject: JSON.stringify(formObjectTemplate, null, 2)
-  },
-  cmOption: {
-    tabSize: 4,
-    styleActiveLine: true,
-    lineNumbers: true,
-    mode: 'text/javascript'
+    // mapperConfig: jsBeautify(JSON.stringify(mappingTemplate)),
+    mapperConfig: test,
+    fhirObject: JSON.stringify(formObjectTemplate, null, 2),
+    cmOption: {
+      tabSize: 4,
+      styleActiveLine: true,
+      lineNumbers: true,
+      mode: 'text/javascript',
+      scroll: true
+    },
   },
   watch: {
     formObject: function (val) {
+      const mapper = eval(this.mapperConfig);
+      console.log("MMMMMMM", mapper);
       const form = JSON.parse(val);
-      const mapper = JSON.parse(this.mapperConfig).mapping;
-      const result = Mapper.formToFhir(
-        JSON.parse(val),
-        JSON.parse(this.mapperConfig).mapping
-      );
+      // const mapper = JSON.parse(this.mapperConfig).mapping;
+      const result = Mapper.formToFhir(form, mapper);
       this.fhirObject = result;
+    },
+    code: function (val) {
+      console.log("Val", val);
     }
   }
-});
-
-CodeMirror.defineMode("mymode", function() {
-  return {
-    token: function(stream,state) {
-      if (stream.match("form") ) {
-        return "style";
-      } {
-        stream.next();
-        return null;
-      }
-    }
-  };
-});
-
-
-var editor = CodeMirror.fromTextArea(document.getElementById('cm'), {
-  mode: "mymode",
-  lineNumbers: true
 });

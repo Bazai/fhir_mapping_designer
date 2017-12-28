@@ -19,6 +19,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/mode/javascript/javascript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/addon/merge/merge.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/addon/selection/active-line.min.js"></script>
+    <!-- JS Beautify -->
+
+    <script src="https://cdn.rawgit.com/beautify-web/js-beautify/v1.7.5/js/lib/beautify.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/addon/merge/merge.min.css" rel="stylesheet">
 </head>
@@ -63,10 +66,11 @@
             </div>
             <!--<codemirror v-model="code" :options="cmOption"></codemirror>-->
             <div class="box-code">
+                <codemirror v-model="mapperConfig" :options="cmOption"></codemirror>
                 <!--<textarea ui-codemirror="codemirrorConfig"-->
                 <!--m-model="mapperConfig"></textarea>-->
                 <!--<textarea class="code-textarea" v-model="mapperConfig" id="cm" name="cm"></textarea>-->
-                <textarea class="code-textarea" v-model="mapperConfig" id="cm" name="cm">form aaa bbb</textarea>
+                <!--<textarea class="code-textarea" v-model="mapperConfig" id="cm" name="cm">form aaa bbb</textarea>-->
             </div>
         </div>
 
