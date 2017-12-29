@@ -43,7 +43,8 @@ body {
     border-bottom: 1px solid #ddd;
     min-height: 50px;
     padding: 13px 30px;
-    background-color: #24292e;
+    /*background-color: #24292e;*/
+    background-color: rgba(40,40,76,1); /*#282B4C*/
     color: #fff;
     align-items: center;
 }
@@ -114,9 +115,9 @@ body {
 
 .box-header {
     padding: 20px 30px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(40,40,76,0.1);
     min-height: 52px;
-    background-color: rgba(36,41,46,0.05);
+    background-color: rgba(40,40,76,0.05);
 }
 
 .box-header h3 {
@@ -244,9 +245,9 @@ body {
 
 /* Split Panes by split.js */
 .gutter {
-    background: rgba(36,41,46,0.01) no-repeat 50%;
-    border-left: 1px solid #eee;
-    border-right: 1px solid #eee;
+    background: rgba(40,40,76,0.01) no-repeat 50%;
+    border-left: 1px solid rgba(40,40,76,0.1);
+    border-right: 1px solid rgba(40,40,76,0.1);
 }
 .gutter.gutter-horizontal {
     height: 100%;
@@ -261,7 +262,7 @@ body {
     width: 160px;
     height: 40px;
     color: rgba(36,41,46,1);
-    border: 1px solid rgba(36,41,46,0.05);
+    border: 1px solid rgba(40,40,76,0.1);
     /*background-color: rgba(36,41,46,0.05);*/
     background-color: #fff; 
     margin-bottom: -8px;
