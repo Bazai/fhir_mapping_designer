@@ -69,8 +69,8 @@ const app = new Vue({
   el: "#app",
   data: {
     formObject: JSON.stringify(formObjectTemplate, null, 2),
-    mapperConfig: patientMappingTemplate,
-    fhirObject: JSON.stringify(formObjectTemplate, null, 2),
+    mapperConfig: "",
+    fhirObject: "",
     mappingTemplate: "",
     cmOption: {
       tabSize: 4,
